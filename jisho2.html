@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>じしょ Form Practice</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  #english {
+    font-size: 1.5em;
+    margin-top: 20px;
+  }
+  .subject {
+    color: #007bff; /* Blue */
+    font-weight: bold;
+  }
+  .action {
+    color: #dc3545; /* Red */
+    font-weight: bold;
+  }
+  .object {
+    color: #28a745; /* Green */
+    font-weight: bold;
+  }
+  .ending {
+    color: #6c757d; /* Gray */
+    font-style: italic;
+  }
+  #japanese-basic {
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+  #japanese-natural {
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+  #buttons {
+    margin-top: 20px;
+  }
+  button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  footer {
+    margin-top: 50px;
+    font-style: italic;
+    color: #6c757d; /* Gray */
+  }
+</style>
+</head>
+<body>
+<h1>じしょ Form Practice</h1>
+<div id="english">Press Enter to generate a sentence</div>
+<div id="japanese-basic"></div>
+<div id="japanese-natural"></div>
+<div id="buttons">
+  <button onclick="generateNextSentence()">Random</button>
+  <button onclick="revealJapanese()">Reveal</button>
+</div>
+
+<footer>Keyboard shortcuts: Press Enter for random, Space for reveal</footer>
+
+<script>
+  const subjects = [
+    {english: { regular: 'I', do: 'Do I' }, basicJapanese: 'わたし', naturalJapanese: '私', form: { regular: 'single', do: 'single' }},
+    {english: { regular: 'You', do: 'Do you' }, basicJapanese: 'あなた', naturalJapanese: '君', form: { regular: 'single', do: 'single' }},
+    {english: { regular: 'He', do: 'Does he' }, basicJapanese: 'かれ', naturalJapanese: '彼', form: { regular: 'plural', do: 'single' }},
+    {english: { regular: 'She', do: 'Does she' }, basicJapanese: 'かのじょ', naturalJapanese: '彼女', form: { regular: 'plural', do: 'single' }},
+    {english: { regular: 'They', do: 'Do they' }, basicJapanese: 'かれら', naturalJapanese: '彼ら', form: { regular: 'single', do: 'single' }},
+    {english: { regular: 'We', do: 'Do we' }, basicJapanese: 'わたしたち', naturalJapanese: '私たち', form: { regular: 'single', do: 'single' }},
+    {english: { regular: 'Kamil', do: 'Do Kamil' }, basicJapanese: 'カミルさん', naturalJapanese: 'カミルさん', form: { regular: 'plural', do: 'single' }}
+    // Add more subjects here if needed
+  ];
+
+  const actions = [
+    {english: { single: 'like', plural: 'likes' }, basicJapanese: 'すき', naturalJapanese: '好き'},
+    {english: { single: 'love', plural: 'loves' }, basicJapanese: 'だいすき', naturalJapanese: '大好き'},
+    {english: { single: 'enjoy', plural: 'enjoys' }, basicJapanese: 'たのしむ', naturalJapanese: '楽しむ'},
+    //{english: { single: 'prefer', plural: 'prefers' }, basicJapanese: 'このむ', naturalJapanese: '好む'},
+    {english: { single: 'hate', plural: 'hates' }, basicJapanese: 'きらい', naturalJapanese: '嫌い'},
+    {english: { single: 'eat', plural: 'eats' }, basicJapanese: 'たべる', naturalJapanese: '食べる'},
+    {english: { single: 'drink', plural: 'drinks' }, basicJapanese: 'のむ', naturalJapanese: '飲む'},
+    {english: { single: 'read', plural: 'reads' }, basicJapanese: 'よむ', naturalJapanese: '読む'},
+    {english: { single: 'study', plural: 'studies' }, basicJapanese: 'べんきょうする', naturalJapanese: '勉強する'},
+    {english: { single: 'cook', plural: 'cooks' }, basicJapanese: 'りょうりする', naturalJapanese: '料理する'},
+    {english: { single: 'play', plural: 'plays' }, basicJapanese: 'あそぶ', naturalJapanese: '遊ぶ'},
+    {english: { single: 'watch', plural: 'watches' }, basicJapanese: 'みる', naturalJapanese: '見る'},
+    {english: { single: 'sleep', plural: 'sleeps' }, basicJapanese: 'ねる', naturalJapanese: '寝る'},
+    {english: { single: 'run', plural: 'runs' }, basicJapanese: 'はしる', naturalJapanese: '走る'},
+    {english: { single: 'sing', plural: 'sings' }, basicJapanese: 'うたう', naturalJapanese: '歌う'},
+    // Add more actions here if needed
+  ];
+
+  const objects = [
+    {english: 'to draw', basicJapanese: 'えをかく', naturalJapanese: '絵を描く'},
+    {english: 'to read', basicJapanese: 'よむ', naturalJapanese: '読む'},
+    {english: 'to write', basicJapanese: 'かく', naturalJapanese: '書く'},
+    {english: 'to sing', basicJapanese: 'うたう', naturalJapanese: '歌う'},
+    {english: 'to dance', basicJapanese: 'おどる', naturalJapanese: '踊る'},
+    {english: 'to shop', basicJapanese: 'かいもの', naturalJapanese: '買い物'},
+    {english: 'to cook', basicJapanese: 'りょうりをする', naturalJapanese: '料理をする'},
+    {english: 'to play sport', basicJapanese: 'スポーツをする', naturalJapanese: 'スポーツをする'},
+    {english: 'to walk', basicJapanese: 'さんぽをする', naturalJapanese: '散歩をする'},
+    {english: 'to clean', basicJapanese: 'おそうじをする', naturalJapanese: 'お掃除をする'},
+    {english: 'to study', basicJapanese: 'べんきょうをする', naturalJapanese: '勉強をする'},
+    {english: 'to sleep', basicJapanese: 'ねます', naturalJapanese: '寝ます'},
+    {english: 'to eat', basicJapanese: 'たべます', naturalJapanese: '食べます'},
+    {english: 'to drink', basicJapanese: 'のみます', naturalJapanese: '飲みます'},
+    {english: 'to watch', basicJapanese: 'みます', naturalJapanese: '見ます'},
+    {english: 'to run', basicJapanese: 'はしります', naturalJapanese: '走ります'},
+    {english: 'to swim', basicJapanese: 'およぎます', naturalJapanese: '泳ぎます'},
+    {english: 'to write', basicJapanese: 'かきます', naturalJapanese: '書きます'},
+    {english: 'to listen', basicJapanese: 'ききます', naturalJapanese: '聞きます'},
+    {english: 'to teach', basicJapanese: 'おしえます', naturalJapanese: '教えます'},
+    // Add more objects here if needed
+  ];
+
+  const endings = [
+    {english: '.', basicJapanese: 'です。', naturalJapanese: 'です。', form: 'regular'},
+    {english: '?', basicJapanese: 'ですか？', naturalJapanese: 'ですか？', form: 'do'},
+    {english: '!', basicJapanese: 'です！', naturalJapanese: 'です！', form: 'regular'}
+    // Add more endings here if needed
+  ];
+
+  // Function to generate a random sentence
+  function generateSentence() {
+    const ending = randomElement(endings);
+    const subject = randomElement(subjects);
+    const action = randomElement(actions);
+    const object = randomElement(objects);
+
+    const englishSentence = `<span class="subject">${subject.english[ending.form]}</span> <span class="action">${action.english[subject.form[ending.form]]}</span> <span class="object">${object.english}</span>${ending.english}`;
+    const basicJapaneseSentence = `<span class="subject">${subject.basicJapanese}</span> は <span class="object">${object.basicJapanese}</span> を <span class="action">${action.basicJapanese}</span>${ending.basicJapanese}`;
+    const naturalJapaneseSentence = `<span class="subject">${subject.naturalJapanese}</span> は <span class="object">${object.naturalJapanese}</span> を <span class="action">${action.naturalJapanese}</span>${ending.naturalJapanese}`;
+
+    return [englishSentence, basicJapaneseSentence, naturalJapaneseSentence];
+  }
+
+  // Function to get a random element from an array
+  function randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
+  // Function to generate the next sentence randomly
+  function generateNextSentence() {
+    currentSentence = generateSentence();
+    document.getElementById('english').innerHTML = currentSentence[0];
+    document.getElementById('japanese-basic').textContent = '';
+    document.getElementById('japanese-natural').textContent = '';
+  }
+
+  // Function to reveal the Japanese form
+  function revealJapanese() {
+    document.getElementById('japanese-basic').innerHTML = currentSentence[1];
+    document.getElementById('japanese-natural').innerHTML = currentSentence[2];
+  }
+
+  // Initial generation of a sentence
+  generateNextSentence();
+
+  // Event listener for key presses
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      generateNextSentence();
+    } else if (event.key === ' ') {
+      revealJapanese();
+    }
+  });
+</script>
+</body>
+</html>
