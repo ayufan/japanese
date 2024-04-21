@@ -70,7 +70,7 @@
     {english: { regular: 'I', do: 'Do I' }, basicJapanese: 'わたし', naturalJapanese: '私', form: { regular: 'single', do: 'single' }},
     {english: { regular: 'You', do: 'Do you' }, basicJapanese: 'あなた', naturalJapanese: '君', form: { regular: 'single', do: 'single' }},
     {english: { regular: 'He', do: 'Does he' }, basicJapanese: 'かれ', naturalJapanese: '彼', form: { regular: 'plural', do: 'single' }},
-    {english: { regular: 'She', do: 'Do she' }, basicJapanese: 'かのじょ', naturalJapanese: '彼女', form: { regular: 'plural', do: 'single' }},
+    {english: { regular: 'She', do: 'Does she' }, basicJapanese: 'かのじょ', naturalJapanese: '彼女', form: { regular: 'plural', do: 'single' }},
     {english: { regular: 'They', do: 'Do they' }, basicJapanese: 'かれら', naturalJapanese: '彼ら', form: { regular: 'single', do: 'single' }}
   ];
 
@@ -78,7 +78,7 @@
     {english: { single: 'like', plural: 'likes' }, basicJapanese: 'すき', naturalJapanese: '好き'},
     {english: { single: 'love', plural: 'loves' }, basicJapanese: 'だいすき', naturalJapanese: '大好き'},
     {english: { single: 'enjoy', plural: 'enjoys' }, basicJapanese: 'たのしむ', naturalJapanese: '楽しむ'},
-    {english: { single: 'prefer', plural: 'prefers' }, basicJapanese: 'このむ', naturalJapanese: '好む'},
+    //{english: { single: 'prefer', plural: 'prefers' }, basicJapanese: 'このむ', naturalJapanese: '好む'},
     {english: { single: 'hate', plural: 'hates' }, basicJapanese: 'きらい', naturalJapanese: '嫌い'},
     // {english: { single: 'eat', plural: 'eats' }, basicJapanese: 'たべる', naturalJapanese: '食べる'},
     // {english: { single: 'drink', plural: 'drinks' }, basicJapanese: 'のむ', naturalJapanese: '飲む'},
@@ -102,10 +102,10 @@
     {english: 'to walk', basicJapanese: 'さんぽをする', naturalJapanese: '散歩をする'},
     {english: 'to clean', basicJapanese: 'おそうじをする', naturalJapanese: 'お掃除をする'},
     {english: 'to study', basicJapanese: 'べんきょうをする', naturalJapanese: '勉強をする'},
-    {english: 'to sleep', basicJapanese: 'ねます', naturalJapanese: '寝ます'},
-    {english: 'to eat', basicJapanese: 'たべます', naturalJapanese: '食べます'},
-    {english: 'to drink', basicJapanese: 'のみます', naturalJapanese: '飲みます'},
-    {english: 'to watch', basicJapanese: 'みます', naturalJapanese: '見ます'}
+    {english: 'to sleep', basicJapanese: 'ねる', naturalJapanese: '寝ます'},
+    {english: 'to eat', basicJapanese: 'たべる', naturalJapanese: '食べます'},
+    {english: 'to drink', basicJapanese: 'のみる', naturalJapanese: '飲みます'},
+    {english: 'to watch', basicJapanese: 'みる', naturalJapanese: '見ます'}
   ];
 
   const endings = [
@@ -123,8 +123,8 @@
     const object = randomElement(objects);
 
     const englishSentence = `<span class="subject">${subject.english[ending.form]}</span> <span class="action">${action.english[subject.form[ending.form]]}</span> <span class="object">${object.english}</span>${ending.english}`;
-    const basicJapaneseSentence = `<span class="subject">${subject.basicJapanese}</span> は <span class="object">${object.basicJapanese}</span> を <span class="action">${action.basicJapanese}</span>${ending.basicJapanese}`;
-    const naturalJapaneseSentence = `<span class="subject">${subject.naturalJapanese}</span> は <span class="object">${object.naturalJapanese}</span> を <span class="action">${action.naturalJapanese}</span>${ending.naturalJapanese}`;
+    const basicJapaneseSentence = `<span class="subject">${subject.basicJapanese}</span> は <span class="object">${object.basicJapanese}</span> こと <span class="action">${action.basicJapanese}</span>${ending.basicJapanese}`;
+    const naturalJapaneseSentence = `<span class="subject">${subject.naturalJapanese}</span> は <span class="object">${object.naturalJapanese}</span> こと <span class="action">${action.naturalJapanese}</span>${ending.naturalJapanese}`;
 
     return [englishSentence, basicJapaneseSentence, naturalJapaneseSentence];
   }
