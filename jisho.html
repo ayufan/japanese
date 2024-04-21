@@ -94,18 +94,18 @@
     {english: 'to draw', basicJapanese: 'えをかく', naturalJapanese: '絵を描く'},
     {english: 'to read', basicJapanese: 'よむ', naturalJapanese: '読む'},
     {english: 'to write', basicJapanese: 'かく', naturalJapanese: '書く'},
-    {english: 'to sing', basicJapanese: 'うたう', naturalJapanese: '歌う'},
-    {english: 'to dance', basicJapanese: 'おどる', naturalJapanese: '踊る'},
-    {english: 'to shop', basicJapanese: 'かいもの', naturalJapanese: '買い物'},
+    {english: 'to sing', basicJapanese: 'うたうをする', naturalJapanese: '歌うをする'},
+    {english: 'to dance', basicJapanese: 'おどるをする', naturalJapanese: '踊るをする'},
+    {english: 'to shop', basicJapanese: 'かいものをする', naturalJapanese: '買い物をする'},
     {english: 'to cook', basicJapanese: 'りょうりをする', naturalJapanese: '料理をする'},
     {english: 'to play sport', basicJapanese: 'スポーツをする', naturalJapanese: 'スポーツをする'},
     {english: 'to walk', basicJapanese: 'さんぽをする', naturalJapanese: '散歩をする'},
     {english: 'to clean', basicJapanese: 'おそうじをする', naturalJapanese: 'お掃除をする'},
     {english: 'to study', basicJapanese: 'べんきょうをする', naturalJapanese: '勉強をする'},
-    {english: 'to sleep', basicJapanese: 'ねる', naturalJapanese: '寝ます'},
-    {english: 'to eat', basicJapanese: 'たべる', naturalJapanese: '食べます'},
-    {english: 'to drink', basicJapanese: 'のみる', naturalJapanese: '飲みます'},
-    {english: 'to watch', basicJapanese: 'みる', naturalJapanese: '見ます'}
+    {english: 'to sleep', basicJapanese: 'ねる', naturalJapanese: '寝る'},
+    {english: 'to eat', basicJapanese: 'たべる', naturalJapanese: '食べる'},
+    {english: 'to drink', basicJapanese: 'のむ', naturalJapanese: '飲む'},
+    {english: 'to watch', basicJapanese: 'みる', naturalJapanese: '見る'}
   ];
 
   const endings = [
@@ -123,8 +123,8 @@
     const object = randomElement(objects);
 
     const englishSentence = `<span class="subject">${subject.english[ending.form]}</span> <span class="action">${action.english[subject.form[ending.form]]}</span> <span class="object">${object.english}</span>${ending.english}`;
-    const basicJapaneseSentence = `<span class="subject">${subject.basicJapanese}</span> は <span class="object">${object.basicJapanese}</span> こと <span class="action">${action.basicJapanese}</span>${ending.basicJapanese}`;
-    const naturalJapaneseSentence = `<span class="subject">${subject.naturalJapanese}</span> は <span class="object">${object.naturalJapanese}</span> こと <span class="action">${action.naturalJapanese}</span>${ending.naturalJapanese}`;
+    const basicJapaneseSentence = `<span class="subject">${subject.basicJapanese}</span> は <span class="object">${object.basicJapanese}</span> の こと <span class="action">${action.basicJapanese}</span>${ending.basicJapanese}`;
+    const naturalJapaneseSentence = `<span class="subject">${subject.naturalJapanese}</span> は <span class="object">${object.naturalJapanese}</span> の こと <span class="action">${action.naturalJapanese}</span>${ending.naturalJapanese}`;
 
     return [englishSentence, basicJapaneseSentence, naturalJapaneseSentence];
   }
